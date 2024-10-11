@@ -7,20 +7,23 @@
     <script type="importmap">
       {
         "imports": {
-          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          "@google/generative-ai": "https://esm.run/@google/generative-ai",
+          "marked": "https://cdn.jsdelivr.net/npm/marked@4.1.1/lib/marked.esm.js"
         }
       }
     </script>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" type="module"></script>
   </head>
-
   <body>
     <h1>pocketknife</h1>
     <h3>fast and deadly (just fast)</h3>
     <p>ai model: gemini-1.5-flash</p>
     <input type="text" id="userInput" placeholder="Enter your message" />
-    <button id="sendBtn">Send</button>
+    <button id="submitBtn">Submit</button>
     <div id="response"></div>
+    <button id="toggleMarkdownBtn" style="display: none">
+      View as Markdown
+    </button>
   </body>
 </html>
