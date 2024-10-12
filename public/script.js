@@ -15,9 +15,11 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
     const endTime = performance.now();
     const timeTaken = ((endTime - startTime) / 1000).toFixed(1);
 
-    document.getElementById(
-      "response"
-    ).innerHTML = `<p><strong>Your input:</strong> ${userInput}</p>${markdownContent}<p><em>took ${timeTaken}s</em></p>`;
+    document.getElementById("response").innerHTML = `
+      <p><strong>Your input:</strong> ${userInput}</p>
+      ${markdownContent}
+      <p><em>Took ${timeTaken}s</em></p>`;
+
     document.getElementById("userInput").value = "";
   }
 });
