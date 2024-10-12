@@ -5,32 +5,19 @@ const API_KEY = "AIzaSyB7jpfsNH70K6Fk4ai_UxdBj2QL3CzWVEw";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-let isMarkdown = false;
-let originalText = "";
-
 document.getElementById("submitBtn").addEventListener("click", async () => {
-  const userMessage = document.getElementById("userInput").value;
-  if (userMessage) {
-    const result = await model.generateContent(userMessage);
-    originalText = await result.response.text();
+  const userInput = document.getElementById("userInput").value;
+  if (userInput) {
+    const startTime = performance.now();
+    const result = await model.generateContent(userInput);
+    const originalText = await result.response.text();
+    const markdownContent = marked.parse(originalText);
+    const endTime = performance.now();
+    const timeTaken = ((endTime - startTime) / 1000).toFixed(1);
+
     document.getElementById(
       "response"
-    ).innerHTML = `<pre>${originalText}</pre>`;
+    ).innerHTML = `<p><strong>Your input:</strong> ${userInput}</p>${markdownContent}<p><em>took ${timeTaken}s</em></p>`;
     document.getElementById("userInput").value = "";
-    document.getElementById("toggleMarkdownBtn").style.display = "block";
-    isMarkdown = false;
   }
-});
-
-document.getElementById("toggleMarkdownBtn").addEventListener("click", () => {
-  const responseDiv = document.getElementById("response");
-  if (isMarkdown) {
-    responseDiv.innerHTML = `<pre>${originalText}</pre>`;
-    document.getElementById("toggleMarkdownBtn").innerText = "View as Markdown";
-  } else {
-    const markdownContent = marked.parse(originalText);
-    responseDiv.innerHTML = markdownContent;
-    document.getElementById("toggleMarkdownBtn").innerText = "View as Text";
-  }
-  isMarkdown = !isMarkdown;
 });
