@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { marked } from "marked";
 
-const API_KEY = "AIzaSyB7jpfsNH70K6Fk4ai_UxdBj2QL3CzWVEw";
+const API_KEY = "AIzaSyD9VWSel_yEM3fxXgZJ4tH07wFEkN7zPFY"; // theres no point of stealing this api key, its literally free on ai.google.dev.
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
